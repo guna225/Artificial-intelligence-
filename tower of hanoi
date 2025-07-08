@@ -1,0 +1,13 @@
+% towers_of_hanoi(N, Source, Auxiliary, Destination)
+% N: Number of discs
+% Source: Starting peg
+% Auxiliary: Temporary peg
+% Destination: Final peg
+
+towers_of_hanoi(0, _, _, _) :- !. % Base case: no discs to move
+
+towers_of_hanoi(N, Source, Auxiliary, Destination) :-
+    N1 is N - 1,
+    towers_of_hanoi(N1, Source, Destination, Auxiliary), % Move N-1 discs from Source to Auxiliary
+    write('Move disc '), write(N), write(' from '), write(Source), write(' to '), write(Destination), nl, % Move the Nth disc
+    towers_of_hanoi(N1, Auxiliary, Source, Destination). % Move N-1 discs from Auxiliary to Destination

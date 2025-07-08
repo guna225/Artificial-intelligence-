@@ -1,0 +1,37 @@
+% Define the initial state: monkey at door, on floor, box at window, banana in middle
+state(at_door, on_floor, at_window, has_not_banana).
+
+% Define possible actions and their effects
+
+% grab(State, NewState)
+grab(state(MonkeyLoc, on_floor, BoxLoc, has_not_banana), state(MonkeyLoc, on_floor, BoxLoc, has_banana)) :-
+    MonkeyLoc = BoxLoc. % Monkey must be at the same location as the box to grab banana
+
+% climb(State, NewState)
+climb(state(MonkeyLoc, on_floor, BoxLoc, HasBanana), state(MonkeyLoc, on_box, BoxLoc, HasBanana)) :-
+    MonkeyLoc = BoxLoc. % Monkey must be at the same location as the box to climb
+
+% push(State, BoxLoc, NewBoxLoc, NewState)
+push(state(MonkeyLoc, on_floor, BoxLoc, HasBanana), BoxLoc, NewBoxLoc, state(NewBoxLoc, on_floor, NewBoxLoc, HasBanana)) :-
+    MonkeyLoc = BoxLoc. % Monkey must be at the same location as the box to push
+
+% walk(State, MonkeyLoc, NewMonkeyLoc, NewState)
+walk(state(MonkeyLoc, on_floor, BoxLoc, HasBanana), MonkeyLoc, NewMonkeyLoc, state(NewMonkeyLoc, on_floor, BoxLoc, HasBanana)).
+
+% Define the goal state
+goal(state(_, _, _, has_banana)).
+
+% Define a path to reach the goal
+solve(State, []) :- goal(State).
+solve(State, [Action|Actions]) :-
+    move(State, Action, NewState),
+    solve(NewState, Actions).
+
+% Define how moves change the state
+move(State, grab, NewState) :- grab(State, NewState).
+move(State, climb, NewState) :- climb(State, NewState).
+move(State, push(BoxLoc, NewBoxLoc), NewState) :- push(State, BoxLoc, NewBoxLoc, NewState).
+move(State, walk(MonkeyLoc, NewMonkeyLoc), NewState) :- walk(State, MonkeyLoc, NewMonkeyLoc, NewState).
+
+% Example query:
+% ?- solve(state(at_door, on_floor, at_window, has_not_banana), Path).

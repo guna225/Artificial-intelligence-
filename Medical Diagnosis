@@ -1,0 +1,22 @@
+% Facts
+symptom(fever).
+symptom(cough).
+symptom(headache).
+symptom(sore_throat).
+symptom(fatigue).
+symptom(nausea).
+
+disease(flu, [fever, cough, headache, fatigue]).
+disease(cold, [cough, sore_throat, fatigue]).
+disease(migraine, [headache, nausea, fatigue]).
+disease(covid19, [fever, cough, fatigue, sore_throat]).
+
+% Rules
+diagnose(Disease) :- 
+    disease(Disease, Symptoms), 
+    findall(S, symptom(S), Symptoms), 
+    length(Symptoms, N), 
+    N > 0.
+
+% Query example
+% ?- diagnose(Disease).

@@ -1,0 +1,16 @@
+% Facts about diseases and suitable diets
+diet(diabetes, low_sugar_low_carb).
+diet(hypertension, low_sodium_high_fiber).
+diet(celiac_disease, gluten_free).
+diet(kidney_disease, low_protein_low_sodium).
+diet(obesity, balanced_calorie_controlled).
+
+% Rule to suggest a dieting system
+suggest_diet(Disease, Diet) :-
+    diet(Disease, Diet).
+
+% Example queries:
+% ?- suggest_diet(diabetes, Diet).
+%    Diet = low_sugar_low_carb.
+% ?- suggest_diet(celiac_disease, Diet).
+%    Diet = gluten_free.

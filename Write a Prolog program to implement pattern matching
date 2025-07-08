@@ -1,0 +1,16 @@
+% Matches a list with a specific head and tail
+match_list_head_tail([Head|Tail], Head, Tail).
+
+% Matches a list with at least two elements and extracts them
+match_list_two_elements([Element1, Element2 | _], Element1, Element2).
+
+% Matches an empty list
+match_empty_list([]).
+
+% Matches a list containing a specific element anywhere
+contains_element(Element, [Element | _]).
+contains_element(Element, [_ | Tail]) :- contains_element(Element, Tail).
+
+
+query
+match_empty_list([]).

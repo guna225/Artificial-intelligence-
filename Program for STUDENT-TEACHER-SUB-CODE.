@@ -1,0 +1,39 @@
+% Facts: student(StudentID, StudentName).
+student(s101, 'Alice').
+student(s102, 'Bob').
+student(s103, 'Charlie').
+
+% Facts: teacher(TeacherID, TeacherName).
+teacher(t201, 'Mr. Smith').
+teacher(t202, 'Ms. Jones').
+
+% Facts: subject(SubjectCode, SubjectName).
+subject(cs101, 'Introduction to Computer Science').
+subject(ma201, 'Calculus I').
+subject(ph301, 'Physics Basics').
+
+% Facts: teaches(TeacherID, SubjectCode).
+teaches(t201, cs101).
+teaches(t201, ma201).
+teaches(t202, ph301).
+
+% Facts: enrolled(StudentID, SubjectCode).
+enrolled(s101, cs101).
+enrolled(s101, ma201).
+enrolled(s102, cs101).
+enrolled(s103, ph301).
+
+% Rules:
+% student_of_teacher(StudentID, TeacherID)
+student_of_teacher(StudentID, TeacherID) :-
+    enrolled(StudentID, SubjectCode),
+    teaches(TeacherID, SubjectCode).
+
+% teacher_of_student(TeacherID, StudentID)
+teacher_of_student(TeacherID, StudentID) :-
+    student_of_teacher(StudentID, TeacherID).
+
+% student_subject_teacher(StudentID, SubjectCode, TeacherID)
+student_subject_teacher(StudentID, SubjectCode, TeacherID) :-
+    enrolled(StudentID, SubjectCode),
+    teaches(TeacherID, SubjectCode).

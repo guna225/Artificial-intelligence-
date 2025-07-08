@@ -1,0 +1,21 @@
+import numpy as np
+
+class FeedForwardNN:
+    def __init__(self, input_size, hidden_size, output_size):
+        self.W1 = np.random.rand(input_size, hidden_size)
+        self.W2 = np.random.rand(hidden_size, output_size)
+
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
+
+    def forward(self, X):
+        self.hidden = self.sigmoid(np.dot(X, self.W1))
+        self.output = self.sigmoid(np.dot(self.hidden, self.W2))
+        return self.output
+
+# Example usage
+if __name__ == "__main__":
+    nn = FeedForwardNN(input_size=3, hidden_size=5, output_size=2)
+    input_data = np.array([[0.1, 0.2, 0.3]])
+    output = nn.forward(input_data)
+    print(output)

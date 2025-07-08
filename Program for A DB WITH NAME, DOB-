@@ -1,0 +1,15 @@
+% Facts representing individuals with Name and Date of Birth (DOB)
+person(john_doe, date(1990, 5, 15)).
+person(jane_smith, date(1988, 11, 22)).
+person(peter_jones, date(1995, 3, 10)).
+person(mary_brown, date(1992, 7, 1)).
+
+% Example queries:
+% To find John Doe's DOB:
+% ?- person(john_doe, DOB).
+
+% To find all people born in 1988:
+% ?- person(Name, date(1988, _, _)).
+
+% To find all people born in a specific month (e.g., July):
+% ?- person(Name, date(_, 7, _)).

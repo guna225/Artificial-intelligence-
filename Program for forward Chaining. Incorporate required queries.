@@ -1,0 +1,28 @@
+% Facts (initial knowledge base)
+fact(sunny).
+fact(warm).
+
+% Rules
+rule(wear_sunglasses) :- fact(sunny).
+rule(go_swimming) :- fact(warm), fact(sunny).
+
+% Forward chaining mechanism
+% infer_facts/0: Infers new facts until no more can be inferred.
+infer_facts :-
+    (   new_fact_inferred -> infer_facts
+    ;   true
+    ).
+
+% new_fact_inferred/0: Attempts to infer a single new fact.
+new_fact_inferred :-
+    rule(X),          % Find a rule
+    \+ fact(X),       % Check if the conclusion is not already a fact
+    asserta(fact(X)), % Add the new fact
+    write('Inferred: '), write(X), nl.
+
+% Queries
+% To start the forward chaining process:
+% ?- infer_facts.
+
+% To check if a specific fact is known:
+% ?- fact(go_swimming).

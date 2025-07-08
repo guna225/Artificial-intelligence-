@@ -1,0 +1,22 @@
+% Predicate to check if a character is a vowel
+is_vowel(C) :-
+    member(C, ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']).
+
+% Predicate to count vowels in a list of characters
+count_vowels([], 0).  % Base case: empty list has 0 vowels
+count_vowels([H|T], Count) :-
+    is_vowel(H),
+    count_vowels(T, RestCount),
+    Count is RestCount + 1.
+count_vowels([H|T], Count) :-
+    \+ is_vowel(H), % If not a vowel
+    count_vowels(T, Count).
+
+% Predicate to find the number of vowels in a string
+find_vowels_in_string(String, NumVowels) :-
+    string_chars(String, CharList), % Convert string to list of characters
+    count_vowels(CharList, NumVowels).
+
+
+query
+?- find_vowels_in_string("Hello World", NumVowels).

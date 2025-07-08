@@ -1,0 +1,21 @@
+% Facts about birds and their ability to fly
+can_fly(sparrow).
+can_fly(eagle).
+can_fly(pigeon).
+cannot_fly(penguin).
+cannot_fly(ostrich).
+cannot_fly(kiwi).
+
+% Rule to check if a bird can fly
+flies(Bird) :- can_fly(Bird).
+
+% Rule to check if a bird cannot fly
+flies(Bird) :- cannot_fly(Bird), !, fail. % If it cannot fly, fail the 'flies' predicate
+
+% Predicate to print whether a bird can fly or not
+check_flight(Bird) :-
+    flies(Bird),
+    format('~w can fly.~n', [Bird]).
+check_flight(Bird) :-
+    format('~w cannot fly.~n', [Bird]).
+

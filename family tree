@@ -1,0 +1,7 @@
+male(john).
+male(david).
+female(mary).
+female(lisa).
+parent(john, david).
+parent(mary, david).
+parent(david, lisa).

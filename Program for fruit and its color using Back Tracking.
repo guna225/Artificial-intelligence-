@@ -1,0 +1,11 @@
+    fruit_color(apple, red).
+    fruit_color(banana, yellow).
+    fruit_color(grape, purple).
+    fruit_color(lime, green).
+    fruit_color(orange, orange).
+
+
+
+query
+
+        fruit_color(Fruit, Color).

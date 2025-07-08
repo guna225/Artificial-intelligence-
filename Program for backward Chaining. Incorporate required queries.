@@ -1,0 +1,12 @@
+% Facts
+has_fever(john).
+has_cough(john).
+feels_tired(john).
+
+% Rules
+has_cold(X) :- has_fever(X), has_cough(X).
+needs_rest(X) :- has_cold(X), feels_tired(X).
+
+
+query
+has_cold(john).
